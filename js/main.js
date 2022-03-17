@@ -3,6 +3,7 @@ const app = new Vue(
         el: '#app',
         data: {
             activeImage: 0,
+            hasAutoPlay: null,
             carouselImages: [
                 {
                     name: 'Immagine random 1',
@@ -45,19 +46,20 @@ const app = new Vue(
                 } else{
                     this.activeImage++;
                 }
+            },
+            autoPlay: function(){
+                console.warn('parto con l\'autoPlay');
+                this.hasAutoPlay = setInterval( () => {
+                    this.nextImage();
+                }, 3000);
+            },
+            stopAutoPlay: function(){
+                clearInterval(this.hasAutoPlay);
+                console.warn('ok, mi fermo!');
+            },
+            focusImage: function(indexImage){
+                this.activeImage = indexImage;
             }
-        },
+        }
     }
 );
-
-
-
-/*
-<div class="carousel-element position-relative">
-    <img src="${array[indexElementView].source}" class="my-img-carousel" alt="${array[indexElementView].name}">
-    <div class="carousel-img-description position-absolute bottom-0 end-0 text-end text-white p-4">
-        <h3>${array[indexElementView].name}</h3>
-        <p>${array[indexElementView].description}</p>
-    </div>
-</div>
-*/

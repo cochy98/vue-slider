@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="col-12 p-5">
-                    <div class="my-carousel-container d-flex flex-column px-5" id="my-carousel">
+                    <div class="my-carousel-container d-flex flex-column px-5" id="my-carousel" @mouseleave="autoPlay" @mouseover="stopAutoPlay">
                         <div class="my-carousel-images">
                             <!-- immagini -->
                             <div class="carousel-element position-relative" :class="(activeImage === index) ? 'd-block' : 'd-none' " v-for="(image, index) in carouselImages">
@@ -51,7 +51,7 @@
                                 <span class="my-prev-hook"></span>
                             </div>
                             <!-- immagini interne -->
-                            <img :src="image.source" class="my-img-thub" :alt="image.name" v-for="image in carouselImages">
+                            <img :src="image.source" :alt="image.name" class="my-img-thub" :class="(activeImage === index) ? 'active' : ' ' " v-for="(image, index) in carouselImages" @click="focusImage(index)">
                             <!-- next -->
                             <div class="my-next position-absolute" @click="nextImage">
                                 <span class="my-next-hook"></span>
@@ -61,7 +61,6 @@
                 </div>
 
                 <div class="col-12 p-3" id="my-after-carousel">
-
                 </div>
             </div>
         </div>
