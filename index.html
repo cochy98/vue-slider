@@ -26,7 +26,7 @@
 </head>
 <body>
 
-    <main>
+    <main id="app">
         <div class="container-fluid p-5">
             <div class="row text-center">
                 <div class="col-12 p-3" id="my-before-carousel">
@@ -37,15 +37,23 @@
                     <div class="my-carousel-container d-flex flex-column px-5" id="my-carousel">
                         <div class="my-carousel-images">
                             <!-- immagini -->
+                            <div class="carousel-element position-relative" :class="(activeImage === index) ? 'd-block' : 'd-none' " v-for="(image, index) in carouselImages">
+                                <img :src="image.source" class="my-img-carousel" :alt="image.name">
+                                <div class="carousel-img-description position-absolute bottom-0 end-0 text-end text-white p-4">
+                                    <h3>{{ image.name }}</h3>
+                                    <p>{{ image.description }}</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="my-thumbnails position-relative">
                             <!-- prev -->
-                            <div class="my-previous position-absolute">
+                            <div class="my-previous position-absolute" @click="previousImage">
                                 <span class="my-prev-hook"></span>
                             </div>
                             <!-- immagini interne -->
+                            <img :src="image.source" class="my-img-thub" :alt="image.name" v-for="image in carouselImages">
                             <!-- next -->
-                            <div class="my-next position-absolute">
+                            <div class="my-next position-absolute" @click="nextImage">
                                 <span class="my-next-hook"></span>
                             </div>
                         </div>
